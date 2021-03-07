@@ -4,6 +4,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:13.2
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: testdb
+        ports: ['5432:5432']
+
     steps:
       - uses: actions/checkout@v2
       - name: Setup Python
