@@ -2,3 +2,7 @@ SECRET_KEY=your secret key
 DEBUG=False
 ALLOWED_HOSTS=localhost, 127.0.0.1
 DATABASE_URL=postgres://postgres:postgres@localhost/testdb
+
+# Note: Do not use '/' at the beginning or at the end
+# Example: static.example.com
+STATIC_URL=
