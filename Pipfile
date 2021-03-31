@@ -15,6 +15,7 @@ django-debug-toolbar = "*"
 flake8 = "*"
 pytest-django = "*"
 pytest-cov = "*"
+model-bakery = "*"
 
 [requires]
 python_version = "3.9"
