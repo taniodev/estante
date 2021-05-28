@@ -2,6 +2,9 @@
   <div class="container d-flex flex-wrap">
     <ul class="nav me-auto">
       <li class="nav-item"><a href="{% url 'base:home' %}" class="nav-link link-dark px-2">Home</a></li>
+      {% if user.is_authenticated %}
+      <li class="nav-item"><a href="{% url 'books:reading_now' %}" class="nav-link link-dark px-2">Meus Livros</a></li>
+      {% endif %}
     </ul>
 
     <ul class="nav">

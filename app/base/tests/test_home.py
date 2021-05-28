@@ -19,6 +19,12 @@ def test_home_link_is_present(resp):
     assert_contains(resp, f'href="{link}"')
 
 
+def test_books_link_is_not_present(resp):
+    # Appears only when the user is logged in
+    link = reverse('books:reading_now')
+    assert_not_contains(resp, f'href="{link}"')
+
+
 def test_login_link_is_present(resp):
     # In the header of all pages
     link = reverse('login')
@@ -34,6 +40,11 @@ def test_logout_link_is_not_present(resp):
 @pytest.fixture
 def resp_logged_in(client_logged_in):
     return client_logged_in.get(reverse('base:home'))
+
+
+def test_books_link_is_present(resp_logged_in):
+    link = reverse('books:reading_now')
+    assert_contains(resp_logged_in, f'href="{link}"')
 
 
 def test_login_link_is_not_present(resp_logged_in):
