@@ -29,3 +29,14 @@ def test_status_code_logged_in(resp_logged_in):
 def test_page_title(resp_logged_in):
     title = 'Lendo Agora | Estante'
     assert_contains(resp_logged_in, f'<title>{title}</title>')
+
+
+def test_reading_now_is_present_in_the_sidebar(resp_logged_in):
+    content = '>Lendo Agora</a>'
+    assert_contains(resp_logged_in, content)
+
+
+def test_reading_now_link_is_present_in_the_sidebar(resp_logged_in):
+    link = reverse('books:reading_now')
+    # This link is present in the header and in the sidebar
+    assert_contains(resp_logged_in, f'href="{link}"', count=2)
