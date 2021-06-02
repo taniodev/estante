@@ -1,6 +1,8 @@
 import pytest
 from django.urls import reverse
 
+from app.django_assertions import assert_contains
+
 
 @pytest.fixture
 def resp(client):
@@ -22,3 +24,8 @@ def resp_logged_in(client_logged_in):
 
 def test_status_code_logged_in(resp_logged_in):
     assert resp_logged_in.status_code == 200
+
+
+def test_page_title(resp_logged_in):
+    title = 'Lendo Agora | Estante'
+    assert_contains(resp_logged_in, f'<title>{title}</title>')
