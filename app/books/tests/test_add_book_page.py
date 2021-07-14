@@ -39,3 +39,16 @@ def test_add_book_is_present_in_the_sidebar(resp_logged_in):
 def test_add_book_link_is_present_in_the_sidebar(resp_logged_in):
     link = reverse('books:add_book')
     assert_contains(resp_logged_in, f'href="{link}"', count=1)
+
+
+@pytest.mark.parametrize('content', [
+    '<form method="post"',
+    '<input type="text" name="title"',
+    '<input type="text" name="author"',
+    '<input type="number" name="published"',
+    '<textarea name="description"',
+    '<select name="read_status"',
+    '<input type="submit" value="Salvar"',
+])
+def test_html_form_content(resp_logged_in, content):
+    assert_contains(resp_logged_in, content)
