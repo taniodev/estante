@@ -1,6 +1,7 @@
 import pytest
 from django.urls import reverse
 
+from app.books.models import BookModel
 from app.django_assertions import assert_contains
 
 
@@ -52,3 +53,28 @@ def test_add_book_link_is_present_in_the_sidebar(resp_logged_in):
 ])
 def test_html_form_content(resp_logged_in, content):
     assert_contains(resp_logged_in, content)
+
+
+@pytest.fixture
+def post_form_data(client_logged_in):
+    data = {
+        'title': 'Book Title',
+        'author': 'Book Author',
+        'published': 2021,
+        'description': 'Book Description',
+        'read_status': 1,
+    }
+    return client_logged_in.post(reverse('books:add_book'), data)
+
+
+def test_save_form_data(post_form_data):
+    assert BookModel.objects.exists()
+
+
+@pytest.fixture
+def post_invalid_form_data(client_logged_in):
+    return client_logged_in.post(reverse('books:add_book'), {})
+
+
+def test_dont_save_invalid_form_data(post_invalid_form_data):
+    assert not BookModel.objects.exists()

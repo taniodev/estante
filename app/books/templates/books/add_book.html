@@ -7,6 +7,7 @@
 <p>Cadastrar um novo livro.</p>
 
 <form method="post" action="{% url 'books:add_book' %}">
+  {% csrf_token %}
   {{ form }}
   <input type="submit" value="Salvar">
 </form>
